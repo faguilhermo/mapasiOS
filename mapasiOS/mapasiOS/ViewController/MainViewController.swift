@@ -39,12 +39,14 @@ class MainViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         view.addSubview(destinationTextField)
         view.addSubview(searchAddressOnMapsButton)
-        autoLayout()
 
+        autoLayout()
     }
 
     @objc private func searchAddressOnMapsButtonAction(_ sender: UIButton) {
         let vc = MapViewController()
+        guard let destination = destinationTextField.text else { return }
+        vc.data = destination
         present(vc, animated: true, completion: nil)
     }
 }

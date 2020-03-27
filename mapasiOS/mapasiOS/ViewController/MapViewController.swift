@@ -11,6 +11,8 @@ import MapKit
 
 class MapViewController: UIViewController {
 
+    var data = ""
+
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton(type: .roundedRect)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -36,7 +38,7 @@ class MapViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
         view.addSubview(closeButton)
         view.addSubview(map)
-
+        
         autoLayout()
     }
 
