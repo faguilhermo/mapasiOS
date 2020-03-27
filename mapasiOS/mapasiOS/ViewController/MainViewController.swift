@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
     @objc private func searchAddressOnMapsButtonAction(_ sender: UIButton) {
         let vc = MapViewController()
         guard let destination = destinationTextField.text else { return }
-        vc.data = destination
+        vc.location = destination
         present(vc, animated: true, completion: nil)
     }
 }
