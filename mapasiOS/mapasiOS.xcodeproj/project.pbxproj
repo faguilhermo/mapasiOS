@@ -14,7 +14,6 @@
 		0CCC810B242E6B1B0036AB72 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC810A242E6B1B0036AB72 /* MainViewController.swift */; };
 		0CCC810E242E6C840036AB72 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC810D242E6C840036AB72 /* MapViewController.swift */; };
 		0CCC8111242EA0740036AB72 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC8110242EA0740036AB72 /* Location.swift */; };
-		0CCC8113242EB6500036AB72 /* Pino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC8112242EB6500036AB72 /* Pino.swift */; };
 		0CCC8116242EB8260036AB72 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC8115242EB8260036AB72 /* icon.png */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +27,6 @@
 		0CCC810A242E6B1B0036AB72 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0CCC810D242E6C840036AB72 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0CCC8110242EA0740036AB72 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		0CCC8112242EB6500036AB72 /* Pino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pino.swift; sourceTree = "<group>"; };
 		0CCC8115242EB8260036AB72 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				0CCC8110242EA0740036AB72 /* Location.swift */,
-				0CCC8112242EB6500036AB72 /* Pino.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -174,7 +171,6 @@
 				0CCC810B242E6B1B0036AB72 /* MainViewController.swift in Sources */,
 				0CCC80F7242E6AC60036AB72 /* AppDelegate.swift in Sources */,
 				0CCC8111242EA0740036AB72 /* Location.swift in Sources */,
-				0CCC8113242EB6500036AB72 /* Pino.swift in Sources */,
 				0CCC80F9242E6AC60036AB72 /* SceneDelegate.swift in Sources */,
 				0CCC810E242E6C840036AB72 /* MapViewController.swift in Sources */,
 			);

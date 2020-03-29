@@ -12,13 +12,13 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
-    lazy var locationDelegate = Location()
     var location = ""
 
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton(type: .roundedRect)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.setTitle("x", for: .normal)
+        closeButton.setTitle("+", for: .normal)
+        closeButton.transform = CGAffineTransform(rotationAngle: 0.785398)
         closeButton.layer.cornerRadius = 20
         closeButton.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
         closeButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
@@ -40,21 +40,26 @@ class MapViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
         view.addSubview(closeButton)
         view.addSubview(map)
-        destinationLocation()
-        map.delegate = locationDelegate
+        initialLocation()
 
         autoLayout()
     }
 
-    private func destinationLocation() {
+    private func initialLocation() {
         Location().convertAddressToCoordinates(location) { (foundLocation) in
-            let pin = Location().pin("Destination", location: foundLocation, color: .black, icon: UIImage(named: "icon.png"))
-            guard let focus = pin?.coordinate else { return }
-            let region = MKCoordinateRegion(center: focus, latitudinalMeters: 3000, longitudinalMeters: 3000)
+            let pin = self.pinConfig(title: "Destination", location: foundLocation)
+            let region = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 3000, longitudinalMeters: 3000)
             self.map.setRegion(region, animated: true)
-            guard let pinMKAnnotation = pin else { return }
-            self.map.addAnnotation(pinMKAnnotation)
+            self.map.addAnnotation(pin)
         }
+    }
+
+    private func pinConfig(title: String, location: CLPlacemark) -> MKPointAnnotation {
+        let pin = MKPointAnnotation()
+        pin.title = title
+        pin.coordinate = location.location!.coordinate
+
+        return pin
     }
 
     @objc private func closeButtonAction(_ sender: UIButton) {
