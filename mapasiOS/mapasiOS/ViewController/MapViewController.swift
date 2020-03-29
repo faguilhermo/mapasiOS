@@ -12,6 +12,7 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    lazy var locationClass = Location()
     var location = ""
 
     private lazy var closeButton: UIButton = {
@@ -41,26 +42,21 @@ class MapViewController: UIViewController {
         view.addSubview(closeButton)
         view.addSubview(map)
         initialLocation()
+        map.delegate = locationClass
 
         autoLayout()
     }
 
     private func initialLocation() {
         Location().convertAddressToCoordinates(location) { (foundLocation) in
-            let pin = self.pinConfig(title: "Destination", location: foundLocation)
+            let pin = Location().pinConfig(title: "Destination", location: foundLocation, color: .black, icon: UIImage(named: "person.png"))
             let region = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 3000, longitudinalMeters: 3000)
             self.map.setRegion(region, animated: true)
             self.map.addAnnotation(pin)
         }
     }
 
-    private func pinConfig(title: String, location: CLPlacemark) -> MKPointAnnotation {
-        let pin = MKPointAnnotation()
-        pin.title = title
-        pin.coordinate = location.location!.coordinate
-
-        return pin
-    }
+    
 
     @objc private func closeButtonAction(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
