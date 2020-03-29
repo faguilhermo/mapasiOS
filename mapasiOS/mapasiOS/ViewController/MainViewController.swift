@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    var tempAddress = ""
+
     private lazy var destinationTextField: UITextField = {
         let destinationTextField = UITextField(frame: .zero)
         destinationTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -17,6 +19,7 @@ class MainViewController: UIViewController {
         destinationTextField.textContentType = .telephoneNumber
         destinationTextField.keyboardType = .alphabet
         destinationTextField.clearButtonMode = .always
+        destinationTextField.addTarget(self, action: #selector(typingAddress), for: .editingChanged)
         destinationTextField.delegate = self
 
         return destinationTextField
@@ -39,6 +42,7 @@ class MainViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         view.addSubview(destinationTextField)
         view.addSubview(searchAddressOnMapsButton)
+        searchAddressOnMapsButton.isHidden = true
 
         autoLayout()
     }
@@ -48,6 +52,16 @@ class MainViewController: UIViewController {
         guard let destination = destinationTextField.text else { return }
         vc.location = destination
         present(vc, animated: true, completion: nil)
+    }
+
+    @objc private func typingAddress(textField: UITextField){
+        guard let typedText = textField.text else { return }
+        tempAddress = typedText
+        if tempAddress.count != 0 {
+            searchAddressOnMapsButton.isHidden = false
+        } else {
+            searchAddressOnMapsButton.isHidden = true
+        }
     }
 }
 

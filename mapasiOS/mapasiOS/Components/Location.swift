@@ -32,8 +32,9 @@ extension Location: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is Pin {
             let annotationView = annotation as! Pin
-            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationView.title!) as? MKMarkerAnnotationView
-            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: annotationView.title!)
+            guard let title = annotationView.title else { return nil }
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: title) as? MKMarkerAnnotationView
+            pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: title)
 
             pinView?.annotation = annotationView
             pinView?.glyphImage = annotationView.icon
