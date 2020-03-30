@@ -12,9 +12,11 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    // MARK: - Variables
     lazy var locationClass = Location()
     var location = ""
 
+    // MARK: - UI elements
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton(type: .roundedRect)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -36,6 +38,7 @@ class MapViewController: UIViewController {
         return map
     }()
 
+    // MARK: - Application lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
@@ -47,6 +50,8 @@ class MapViewController: UIViewController {
         autoLayout()
     }
 
+    // MARK: - Functions
+    /// Creates a region to zoom in when the maps screen loads.
     private func initialLocation() {
         Location().convertAddressToCoordinates(location) { (foundLocation) in
             let pin = Location().pinConfig(title: "Destination", location: foundLocation, color: .black, icon: UIImage(named: "person.png"))
@@ -56,14 +61,17 @@ class MapViewController: UIViewController {
         }
     }
 
-    
-
+    // MARK: - Actions
+    /// Dismiss a view controller when the close button is clicked.
+    /// - Parameter sender: the button itself.
     @objc private func closeButtonAction(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: - Extensions
 extension MapViewController {
+    /// Setup the autolayout
     private func autoLayout() {
         closeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true

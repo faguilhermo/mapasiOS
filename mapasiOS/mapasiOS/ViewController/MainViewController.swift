@@ -10,8 +10,10 @@ import UIKit
 
 class MainViewController: UIViewController {
 
+    // MARK: - Variables
     var tempAddress = ""
 
+    // MARK: - UI elements
     private lazy var destinationTextField: UITextField = {
         let destinationTextField = UITextField(frame: .zero)
         destinationTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +39,7 @@ class MainViewController: UIViewController {
         return searchAddressOnMapsButton
     }()
 
+    // MARK: - Application lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
@@ -47,6 +50,9 @@ class MainViewController: UIViewController {
         autoLayout()
     }
 
+    // MARK: - Actions
+    /// The search on maps button action, responsible to present the map screen.
+    /// - Parameter sender: the button itself.
     @objc private func searchAddressOnMapsButtonAction(_ sender: UIButton) {
         let vc = MapViewController()
         guard let destination = destinationTextField.text else { return }
@@ -54,6 +60,8 @@ class MainViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
 
+    /// Shows the keyboard if the text field has more than zero characteres.
+    /// - Parameter textField: the text field itself.
     @objc private func typingAddress(textField: UITextField){
         guard let typedText = textField.text else { return }
         tempAddress = typedText
@@ -65,7 +73,9 @@ class MainViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension MainViewController: UITextFieldDelegate {
+    // Dismiss keyboard if return button is pressed.
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
@@ -73,6 +83,7 @@ extension MainViewController: UITextFieldDelegate {
 }
 
 extension MainViewController {
+    /// Setup the autolayout
     private func autoLayout() {
         destinationTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         destinationTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true

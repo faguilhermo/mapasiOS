@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 
 final class Location: NSObject {
+    /// Convert user's input in CLPlacemark coordinates.
+    /// - Parameter address: user input address.
+    /// - Parameter local: the coordinate found.
+    /// - Parameter local: the found coordinate escape to other function.
     public func convertAddressToCoordinates(_ address: String, local: @escaping(_ local: CLPlacemark) -> Void) {
         let converter = CLGeocoder()
         converter.geocodeAddressString(address) { (localizationList, error) in
@@ -18,6 +22,12 @@ final class Location: NSObject {
         }
     }
 
+    /// A pin generator, to easily create a pin.
+    /// - Parameter title: the pin title.
+    /// - Parameter location: the pin coordinates.
+    /// - Parameter color: the pin color.
+    /// - Parameter icon: the pin icon.
+    /// - Returns: the pin object created.
     public func pinConfig(title: String, location: CLPlacemark, color: UIColor?, icon: UIImage?) -> Pin {
         let pin = Pin(coordinate: location.location!.coordinate)
         pin.title = title
@@ -28,7 +38,9 @@ final class Location: NSObject {
     }
 }
 
+// MARK: - Extensions
 extension Location: MKMapViewDelegate {
+    // change the real pin appearance
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is Pin {
             let annotationView = annotation as! Pin

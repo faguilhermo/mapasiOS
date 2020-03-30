@@ -10,11 +10,13 @@ import UIKit
 import MapKit
 
 class Pin: NSObject, MKAnnotation {
+    // MARK: - Variables
     var title: String?
     var icon: UIImage?
     var color: UIColor?
     var coordinate: CLLocationCoordinate2D
 
+    // MARK: - Init
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
     }
